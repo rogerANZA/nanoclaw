@@ -3,8 +3,8 @@
 
 // discord
 
-// gmail
-import './gmail.js';
+// gmail (channel mode disabled — tools still available via MCP in agent containers)
+// import './gmail.js';
 
 // slack
 
