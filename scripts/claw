@@ -130,10 +130,16 @@ def run_container(runtime: str, image: str, payload: dict, timeout: int = 300) -
     proxy_url = f"http://{CONTAINER_HOST_GATEWAY}:{CREDENTIAL_PROXY_PORT}"
     secrets = payload.get("secrets", {})
     auth_mode = "api-key" if "ANTHROPIC_API_KEY" in secrets else "oauth"
+    home = Path.home()
     cmd = [runtime, "run", "-i", "--rm",
            "-e", f"ANTHROPIC_BASE_URL={proxy_url}",
            "-e", "CLAUDE_CODE_OAUTH_TOKEN=placeholder" if auth_mode == "oauth" else "ANTHROPIC_API_KEY=placeholder",
-           image]
+    ]
+    # Mount Gmail credentials if present
+    gmail_dir = home / ".gmail-mcp"
+    if gmail_dir.exists():
+        cmd += ["-v", f"{gmail_dir}:/home/node/.gmail-mcp"]
+    cmd.append(image)
     dbg(f"cmd: {' '.join(cmd)}")
 
     # Show payload sans secrets
