@@ -175,6 +175,15 @@ function buildVolumeMounts(
     });
   }
 
+  const calendarDir = path.join(homeDir, '.config', 'google-calendar-mcp');
+  if (fs.existsSync(calendarDir)) {
+    mounts.push({
+      hostPath: calendarDir,
+      containerPath: '/home/node/.config/google-calendar-mcp',
+      readonly: false,
+    });
+  }
+
   const gmailEthzDir = path.join(homeDir, '.gmail-mcp-ethz');
   if (fs.existsSync(gmailEthzDir)) {
     mounts.push({

@@ -142,6 +142,9 @@ def run_container(runtime: str, image: str, payload: dict, timeout: int = 300) -
     gmail_ethz_dir = home / ".gmail-mcp-ethz"
     if gmail_ethz_dir.exists():
         cmd += ["-v", f"{gmail_ethz_dir}:/home/node/.gmail-mcp-ethz"]
+    calendar_dir = home / ".config" / "google-calendar-mcp"
+    if calendar_dir.exists():
+        cmd += ["-v", f"{calendar_dir}:/home/node/.config/google-calendar-mcp"]
     cmd.append(image)
     dbg(f"cmd: {' '.join(cmd)}")
 

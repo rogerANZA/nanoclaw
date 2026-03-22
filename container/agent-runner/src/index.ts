@@ -410,6 +410,7 @@ async function runQuery(
         'mcp__nanoclaw__*',
         'mcp__gmail__*',
         'mcp__gmail_ethz__*',
+        'mcp__google_calendar__*',
       ],
       env: sdkEnv,
       permissionMode: 'bypassPermissions',
@@ -435,6 +436,14 @@ async function runQuery(
           env: {
             GMAIL_OAUTH_PATH: '/home/node/.gmail-mcp-ethz/gcp-oauth.keys.json',
             GMAIL_CREDENTIALS_PATH: '/home/node/.gmail-mcp-ethz/credentials.json',
+          },
+        },
+        google_calendar: {
+          command: 'npx',
+          args: ['-y', '@cocal/google-calendar-mcp'],
+          env: {
+            GOOGLE_OAUTH_CREDENTIALS: '/home/node/.config/google-calendar-mcp/gcp-oauth.keys.json',
+            GOOGLE_CALENDAR_MCP_TOKEN_PATH: '/home/node/.config/google-calendar-mcp/tokens.json',
           },
         },
       },
