@@ -411,6 +411,7 @@ async function runQuery(
         'mcp__gmail__*',
         'mcp__gmail_ethz__*',
         'mcp__google_calendar__*',
+        'mcp__google_drive__*',
       ],
       env: sdkEnv,
       permissionMode: 'bypassPermissions',
@@ -436,6 +437,13 @@ async function runQuery(
           env: {
             GMAIL_OAUTH_PATH: '/home/node/.gmail-mcp-ethz/gcp-oauth.keys.json',
             GMAIL_CREDENTIALS_PATH: '/home/node/.gmail-mcp-ethz/credentials.json',
+          },
+        },
+        google_drive: {
+          command: 'npx',
+          args: ['-y', '@modelcontextprotocol/server-gdrive'],
+          env: {
+            GDRIVE_CREDENTIALS_PATH: '/home/node/.config/google-drive-mcp/credentials.json',
           },
         },
         google_calendar: {

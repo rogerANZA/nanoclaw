@@ -175,6 +175,15 @@ function buildVolumeMounts(
     });
   }
 
+  const driveDir = path.join(homeDir, '.config', 'google-drive-mcp');
+  if (fs.existsSync(driveDir)) {
+    mounts.push({
+      hostPath: driveDir,
+      containerPath: '/home/node/.config/google-drive-mcp',
+      readonly: false,
+    });
+  }
+
   const calendarDir = path.join(homeDir, '.config', 'google-calendar-mcp');
   if (fs.existsSync(calendarDir)) {
     mounts.push({
