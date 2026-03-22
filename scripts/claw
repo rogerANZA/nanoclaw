@@ -139,6 +139,9 @@ def run_container(runtime: str, image: str, payload: dict, timeout: int = 300) -
     gmail_dir = home / ".gmail-mcp"
     if gmail_dir.exists():
         cmd += ["-v", f"{gmail_dir}:/home/node/.gmail-mcp"]
+    gmail_ethz_dir = home / ".gmail-mcp-ethz"
+    if gmail_ethz_dir.exists():
+        cmd += ["-v", f"{gmail_ethz_dir}:/home/node/.gmail-mcp-ethz"]
     cmd.append(image)
     dbg(f"cmd: {' '.join(cmd)}")
 
